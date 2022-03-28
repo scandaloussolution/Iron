@@ -10,7 +10,8 @@ local DefaultTheme = {
 local Theme = {}
 for t,c in pairs(DefaultTheme) do
 	Theme[t] = c
-end
+end 
+
 
 local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/scandaloussolution/Iron/main/Kavo.lua"))()--require(script:WaitForChild("Kavo")) 
 local esp do 
@@ -178,7 +179,7 @@ local esp do
 								local child = children[i]
 								local p = child.Dot.AbsolutePosition
 
-								if (Vector2.new(pos.X, pos.Y) - p).Magnitude <= 300 and game:GetService("Players")[child.Text].TeamColor == plr.TeamColor then
+								if (Vector2.new(pos.X, pos.Y) - p).Magnitude <= 300 and game:GetService("Players")[child.Text].TeamColor == plr.TeamColor and pos.Z > 0 then
 									return true, child.Text
 								end
 							end
@@ -285,6 +286,28 @@ local name do
 	name = n
 end
 
+local plr = game:GetService("Players").LocalPlayer
+local char
+if name:lower():find("phantom forces")then
+	if workspace:FindFirstChild("Ignore")then
+		if workspace.Ignore:FindFirstChild("RefPlayer")then
+			char = workspace.Ignore.RefPlayer
+			workspace.Ignore.ChildAdded:Connect(function(c)
+				if c.Name == "RefPlayer"then
+					char = c
+				end
+			end)
+		end
+	end
+end
+
+if not char then
+	char = plr.Character
+	plr.CharacterAdded:Connect(function(c)
+		char = c
+	end)
+end
+
 local lib = kavo:CreateLib("Iron - "..name)
 lib:EnableUI(true)
 
@@ -366,6 +389,40 @@ local tabs = {
 							}
 						},
 					}
+				}
+			},
+			["Humanoid"] = {
+				desc = "Modify your humanoid",
+				data = nil,
+				elements = {
+					["NewSlider"] = {
+						{
+							args = {
+								"WalkSpeed",
+								0,
+								100,
+								function(val)
+									local h = char:FindFirstChildOfClass("Humanoid")
+									if h then
+										h.WalkSpeed = val
+									end
+								end,
+							}
+						},
+						{
+							args = {
+								"HipHeight",
+								0,
+								100,
+								function(val)
+									local h = char:FindFirstChildOfClass("Humanoid")
+									if h then
+										h.HipHeight = val
+									end
+								end,
+							}
+						}
+					},	
 				}
 			}
 		},
