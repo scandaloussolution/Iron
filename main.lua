@@ -1,3 +1,17 @@
+local DefaultTheme = {
+	Scheme = Color3.fromRGB(110, 153, 202);
+	Background = Color3.fromRGB(31, 32, 40);
+	Topbar = Color3.fromRGB(22, 23, 30);
+	Content = Color3.fromRGB(41, 41, 50);
+	ScrollbarTrack = Color3.fromRGB(33, 34, 40);
+	Text = Color3.fromRGB(255, 255, 255);
+	Item = Color3.fromRGB(51, 51, 60);
+}
+local Theme = {}
+for t,c in pairs(DefaultTheme) do
+	Theme[t] = c
+end
+
 local kavo = loadstring(game:HttpGet("https://raw.githubusercontent.com/scandaloussolution/Iron/main/Kavo.lua"))()--require(script:WaitForChild("Kavo")) 
 local esp do 
 	-- this was ripped from another one of my projects
@@ -100,7 +114,7 @@ local esp do
 											quad.PointD = Vector2.new(point.X, point.Y) 
 
 											if #teams > 0 then
-												quad.Color = players[i].Team == plr.Team and Color3.new(0, 1, 0) or Color3.new(1, 0, 0)
+												quad.Color = players[i].Team == plr.Team and (_G.esp_col or Color3.new(1, 0, 0)) or (_G.esp_team_col or Color3.new(0, 1, 0))
 											end
 											if first_person then
 												line.From = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y)
@@ -128,7 +142,7 @@ local esp do
 											draw[3].Visible = visible
 
 											if enabled["Rainbow tracers"]then 
-												local rainbow = Color3.fromHSV((tick()%2)/2, 1, 1)
+												local rainbow = Color3.fromHSV((tick()%4)/4, 1, 1)
 												quad.Color = rainbow
 											end
 											line.Color = quad.Color
@@ -236,7 +250,7 @@ local esp do
 												visible = false
 											end
 
-											quad.Color = ally and Color3.new(0, 1, 0) or Color3.new(1, 0, 0)
+											quad.Color = ally and (_G.esp_col or Color3.new(1, 0, 0)) or (_G.esp_team_col or Color3.new(0, 1, 0))
 											line.To = Vector2.new(point.X, point.Y)
 											line.Visible = visible
 											quad.Visible = visible
@@ -244,8 +258,8 @@ local esp do
 											draw[3].Visible = visible
 
 											if enabled["Rainbow tracers"]then 
-												local rainbow = Color3.fromHSV((tick()%2)/2, 1, 1)
-												quad.Color = rainbow
+											local rainbow = Color3.fromHSV((tick()%4)/4, 1, 1)
+											quad.Color = rainbow
 											end
 											line.Color = quad.Color
 											draw[3].Color = line.Color
@@ -290,7 +304,7 @@ local tabs = {
 								local drawing = {}
 								new.Changed:Connect(function(toggled)
 									_G.esp = toggled
-									esp(toggled, _G.rainbow_esp, _G.show_team)
+									esp(_G.esp, _G.rainbow_esp, _G.show_team)
 								end)
 							end,
 						},
@@ -322,9 +336,35 @@ local tabs = {
 					["NewLabel"] = {
 						{
 							args = {
-								"This is a Synapse X exclusive! This will not work with exploits that do not have the Drawing library."
+								"This is a Synapse X exclusive!",
+								nil,
+								{
+									Icon = "rbxassetid://3192540038"
+								}
 							}
 						}
+					},
+					["NewColorPicker"] = {
+						{
+							args = {
+								"ESP Color",
+								nil,
+								Color3.new(1, 0, 0),
+								function(col)
+									_G.esp_col = col
+								end,
+							}
+						},
+						{
+							args = {
+								"ESP Team Color",
+								nil,
+								Color3.new(0, 1, 0),
+								function(col)
+									_G.esp_team_col = col
+								end,
+							}
+						},
 					}
 				}
 			}
@@ -343,7 +383,7 @@ local tabs = {
 						{
 							args = {
 								"Rejoin",
-								"Makes you rejoin",
+								nil,
 								function()
 									game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 								end,
@@ -355,6 +395,25 @@ local tabs = {
 		}
 	}
 }
+
+local colors = lib:NewTab("Theme")
+local section = colors:NewSection("Color", {Hidden = true})
+local theme_pickers= {}
+
+for name, col in pairs(Theme) do
+	local picker = colors:NewColorPicker(name, nil, col, function(col)
+		Theme[name] = col 
+		lib:UpdateThemeColor(name, col)
+	end)
+	theme_pickers[name] = picker
+end
+
+section:NewButton("Reset", "Reset all themes", function()
+	for name, col in pairs(DefaultTheme) do 
+		Theme[name] = col
+		theme_pickers[name]:SetColor(col)
+	end
+end)
 
 for tab_name, element in next, tabs do
 	local tab = lib:NewTab(tab_name, element.data)
