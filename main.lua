@@ -114,7 +114,7 @@ local esp do
 											quad.PointD = Vector2.new(point.X, point.Y) 
 
 											if #teams > 0 then
-												quad.Color = players[i].Team == plr.Team and (_G.esp_col or Color3.new(1, 0, 0)) or (_G.esp_team_col or Color3.new(0, 1, 0))
+											quad.Color = players[i].Team == plr.Team and (_G.esp_team_col or Color3.new(1, 0, 0)) or (_G.esp_col or Color3.new(0, 1, 0))
 											end
 											if first_person then
 												line.From = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y)
@@ -194,7 +194,7 @@ local esp do
 								local character = players[i]
 								local root = character:FindFirstChild("Torso") 
 								local is_self = false
-								local ally, name = nil, nil--is_on_team(character)
+								local ally, name = is_on_team(character)
 								if root then
 									local dist = workspace.CurrentCamera.CFrame.Position - root.CFrame.Position
 									is_self = dist.Magnitude < 3
@@ -250,7 +250,7 @@ local esp do
 												visible = false
 											end
 
-											quad.Color = ally and (_G.esp_col or Color3.new(1, 0, 0)) or (_G.esp_team_col or Color3.new(0, 1, 0))
+											quad.Color = ally and (_G.esp_team_col or Color3.new(1, 0, 0)) or (_G.esp_col or Color3.new(0, 1, 0))
 											line.To = Vector2.new(point.X, point.Y)
 											line.Visible = visible
 											quad.Visible = visible
