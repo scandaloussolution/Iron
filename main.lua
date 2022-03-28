@@ -395,7 +395,7 @@ local tabs = {
 				desc = "Modify your humanoid",
 				data = nil,
 				func = function()
-					game:GetService("RunService").RenderStepped:Connect(function()
+					game:GetService("RunService"):BindToRenderStep("aaa", Enum.RenderPriority.Character.Value, function()
 						local h = char:FindFirstChildOfClass("Humanoid")
 						if h then
 							h.Walkspeed = _G.ws
