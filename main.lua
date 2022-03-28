@@ -395,7 +395,7 @@ local tabs = {
 		}
 	},
 	["Credit"] = {
-		section = {
+		sections = {
 			["The people who made it possible"] = {
 				desc = "Thank you!",
 				data = nil, 
