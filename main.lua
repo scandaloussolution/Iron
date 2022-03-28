@@ -404,17 +404,30 @@ local tabs = {
 						{
 							args = {
 								"EwDev: KavoPlus gui utility and inspiration",
-								"ScandalousSolution: Creator",
+							}
+						},
+						{
+							args = {
+								"ScandalousSolution: For creating this",
+							}
+						},
+						{
+							args = {
 								"Roblox: For being the crappy platform it is",
+							}
+						},
+						{
+							args = {
 								"Hotel: Trivago"
 							}
 						}
-					}
+					},
 				}
 			}
 		}
 	}
 }
+
 
 local colors = lib:NewTab("Theme")
 local section = colors:NewSection("Color", {Hidden = true})
