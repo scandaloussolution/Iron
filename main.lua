@@ -178,7 +178,7 @@ local esp do
 								local child = children[i]
 								local p = child.Dot.AbsolutePosition
 
-								if (Vector2.new(pos.X, pos.Y) - p).Magnitude <= 130 and game:GetService("Players")[child.Text].TeamColor == plr.TeamColor then
+								if (Vector2.new(pos.X, pos.Y) - p).Magnitude <= 300 and game:GetService("Players")[child.Text].TeamColor == plr.TeamColor then
 									return true, child.Text
 								end
 							end
