@@ -401,7 +401,7 @@ local section = colors:NewSection("Color", {Hidden = true})
 local theme_pickers= {}
 
 for name, col in pairs(Theme) do
-	local picker = colors:NewColorPicker(name, nil, col, function(col)
+	local picker = section:NewColorPicker(name, nil, col, function(col)
 		Theme[name] = col 
 		lib:UpdateThemeColor(name, col)
 	end)
