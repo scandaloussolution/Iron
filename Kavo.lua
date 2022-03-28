@@ -747,7 +747,6 @@ function UI:CreateLib(Title,Theme,Position)
 
 				local LabelItem,OnDisplayDescription = CreateItem(Name,Data.Icon or "rbxassetid://9177477893",Description,"Item")
 				LabelItem.LayoutOrder = #SectionHolder:GetChildren() - 1
-				LabelItem.Size = UDim2.new(LabelItem.Size.X.Scale, LabelItem.Size.X.Offset, LabelItem.Size.Y.Scale, LabelItem.Size.Y.Offset + (LabelItem.TextBounds.Y-LabelItem.TextSize))
 				LabelItem.Parent = SectionHolder
 
 				local Label = {}
@@ -1048,7 +1047,6 @@ function UI:CreateLib(Title,Theme,Position)
 				return TextBox
 			end
 			function Section:NewColorPicker(Name,Description,Color,Callback,Data)
-				local Changed = Instance.new("BindableEvent")
 				Name = Name or "ColorPicker"
 				Color = Color or Color3.new(1,1,1)
 				Callback = Callback or function() end
@@ -1109,7 +1107,6 @@ function UI:CreateLib(Title,Theme,Position)
 				ValueSlider.Parent = Value
 
 				local ColorPicker = {}
-				ColorPicker.Changed = Changed.Event
 				ColorPicker.Focused = false
 				local function UpdatePreview()
 					local Color = ColorPicker:GetColor()
@@ -1135,7 +1132,6 @@ function UI:CreateLib(Title,Theme,Position)
 						ColorSequenceKeypoint.new(0,Color3.fromHSV(h,s,1)),
 						ColorSequenceKeypoint.new(1,Color3.new(0,0,0))
 					})
-					Changed:Fire(Color3.fromHSV(h,s,1))
 
 				end
 				local function UpdatePickers()
