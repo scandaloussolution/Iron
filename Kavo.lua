@@ -747,6 +747,7 @@ function UI:CreateLib(Title,Theme,Position)
 
 				local LabelItem,OnDisplayDescription = CreateItem(Name,Data.Icon or "rbxassetid://9177477893",Description,"Item")
 				LabelItem.LayoutOrder = #SectionHolder:GetChildren() - 1
+				LabelItem.Size = UDim2.new(LabelItem.Size.X.Scale, LabelItem.Size.X.Offset, LabelItem.Size.Y.Scale, LabelItem.Size.Y.Offset + (LabelItem.TextBounds.Y-LabelItem.TextSize))
 				LabelItem.Parent = SectionHolder
 
 				local Label = {}
