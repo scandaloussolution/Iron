@@ -519,4 +519,3 @@ for tab_name, element in next, tabs do
 		end
 	end
 end
-
