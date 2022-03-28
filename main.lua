@@ -393,12 +393,12 @@ local tabs = {
 				}
 			}
 		}
-	},
-	["Credit"] = {
+	},	
+	["Credits"] = {
 		sections = {
-			["The people who made it possible"] = {
-				desc = "Thank you!",
-				data = nil, 
+			["How its possible"] = {
+				desc = "Thank you everyone!",
+				data = nil,
 				elements = {
 					["NewLabel"] = {
 						{
@@ -425,7 +425,7 @@ local tabs = {
 				}
 			}
 		}
-	}
+	},
 }
 
 
