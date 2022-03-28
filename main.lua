@@ -394,6 +394,15 @@ local tabs = {
 			["Humanoid"] = {
 				desc = "Modify your humanoid",
 				data = nil,
+				func = function()
+					game:GetService("RunService").RenderStepped:Connect(function()
+						local h = char:FindFirstChildOfClass("Humanoid")
+						if h then
+							h.Walkspeed = _G.ws
+							h.HipHeight = _G.hh
+						end
+					end)
+				end,
 				elements = {
 					["NewSlider"] = {
 						{
@@ -405,6 +414,7 @@ local tabs = {
 								function(val)
 									local h = char:FindFirstChildOfClass("Humanoid")
 									if h then
+										_G.ws = val
 										h.WalkSpeed = val
 									end
 								end,
@@ -419,6 +429,7 @@ local tabs = {
 								function(val)
 									local h = char:FindFirstChildOfClass("Humanoid")
 									if h then
+										_G.hh = val
 										h.HipHeight = val
 									end
 								end,
