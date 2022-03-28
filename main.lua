@@ -393,6 +393,26 @@ local tabs = {
 				}
 			}
 		}
+	},
+	["Credit"] = {
+		section = {
+			["The people who made it possible"] = {
+				desc = "Thank you!",
+				data = nil, 
+				elements = {
+					["NewLabel"] = {
+						{
+							args = {
+								"EwDev: KavoPlus gui utility and inspiration",
+								"ScandalousSolution: Creator",
+								"Roblox: For being the crappy platform it is",
+								"Hotel: Trivago"
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
