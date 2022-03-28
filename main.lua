@@ -399,6 +399,7 @@ local tabs = {
 						{
 							args = {
 								"WalkSpeed",
+								nil,
 								0,
 								100,
 								function(val)
@@ -412,6 +413,7 @@ local tabs = {
 						{
 							args = {
 								"HipHeight",
+								nil,
 								0,
 								100,
 								function(val)
@@ -519,3 +521,4 @@ for tab_name, element in next, tabs do
 		end
 	end
 end
+
