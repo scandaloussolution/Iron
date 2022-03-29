@@ -42,11 +42,12 @@ function Utility:Tween(obj,Info,Props)
 	return _Tween
 end
 function Utility:CallCallback(Callback,...)
-	local s,r = pcall(Callback,...)
+	--[[local s,r = pcall(Callback,...)
 	if not s then
 		warn(r)
 	end
-	return s == true and r ~= false
+	return s == true and r ~= false]]
+	Callback(...)
 end
 function Utility:IsColorDark(Color)
 	return math.sqrt(
