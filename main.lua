@@ -412,10 +412,12 @@ local tabs = {
 								0,
 								100,
 								function(val)
-									local h = char:FindFirstChildOfClass("Humanoid")
-									if h then
-										_G.ws = val
-										h.WalkSpeed = val
+									if char then
+										local h = char:FindFirstChildOfClass("Humanoid")
+										if h then
+											_G.ws = val
+											h.WalkSpeed = val
+										end
 									end
 								end,
 							}
@@ -427,11 +429,14 @@ local tabs = {
 								0,
 								100,
 								function(val)
-									local h = char:FindFirstChildOfClass("Humanoid")
-									if h then
-										_G.hh = val
-										h.HipHeight = val
+									if char then
+										local h = char:FindFirstChildOfClass("Humanoid")
+										if h then
+											_G.hh = val
+											h.HipHeight = val
+										end
 									end
+
 								end,
 							}
 						}
